@@ -1,34 +1,44 @@
 package com.sizanosky;
 
+/*
+ * Classe ComputadorA
+ *
+ * Classe que executa o padrão de jogadas do CPU A
+ *
+ * @author  Marcos Fabricio Sizanosky
+ * @version 1.0
+ * @since   2021-10-15
+*/
+
+/** A classe ComputadorA .*/
 public class ComputadorA extends Computador {
 	
-	// Constants.
-	final char CPU = 'O';
-//	final char OPONENTE = 'X';
-	
-
     // Constructor.
     public ComputadorA() {
+    
     }
-
-    public void SetJogadaCompA() {
+    
+    // Methods;
+    /** O método jogadaCompA() .*/
+    public int jogadaCompA(Tabuleiro tab) {
     	
     	int pos = 1;
     
-    	for (int lin=0; lin < 2; lin++) {
-    		for (int col=0; col <= 4; col++) {
+    	for (int lin=0; lin <= 2; lin++) {
+    		for (int col=0; col <= 4; col += 2) {
     		
-    			if (matrizTab[lin][col] == '_') {
-	    			// Estou tendo problemas com essa parte também, talvez pela verificação das condições não estar funcionando de acordo
-    				ArmazenaJogada(pos, CPU);
+    			if (tab.matrizTab[lin][col] == '_') {
+    				return pos;
+    			}
+    			else if (pos > 9) {
+    				jogadaCompA(tab);
     			}
     			
     			else {
-    				lin++;
-    				col++;
     				pos++;
     			}
     		}
     	}
+    	return pos;
     }
 }

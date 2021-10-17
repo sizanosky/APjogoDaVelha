@@ -1,7 +1,19 @@
 package com.sizanosky;
 
-public class Tabuleiro extends JogoDaVelha {
+/*
+ * Classe Tabuleiro
+ *
+ * Classe que valida e armazena todas as jogadas de todos os jogadores.
+ *
+ * @author  Marcos Fabricio Sizanosky
+ * @version 1.0
+ * @since   2021-10-15
+*/
 
+/** A classe Tabuleiro valida, armazena e imprime todas as jogadas de todos os jogadores
+ * a classe também controla o status da partida.*/
+public class Tabuleiro {
+	
 	// Constants.
     final char HUMANO = 'X';
     final char CPU = 'O';
@@ -13,121 +25,133 @@ public class Tabuleiro extends JogoDaVelha {
 
 	// Construtor.
 	public Tabuleiro() {
-		matrizTab = new char[][]{{'_', '|', '_', '|', '_'},
-								 {'_', '|', '_', '|', '_'},
-								 {'_', '|', '_', '|', '_'}};
+//		matrizTab = new char[][]{{'_', '|', '_', '|', '_'},
+//								 {'_', '|', '_', '|', '_'},
+//								 {'_', '|', '_', '|', '_'}};
 	}
 	
     // Methods.
-    public void ArmazenaJogada (int posicao, char quemJogou){
+	/** O método zeraTabuleiro() zera todas as jogadas e inicializa matrizTab com a forma do tabuleiro.*/
+	public void zeraTabuleiro() {
+		matrizTab = new char[][]{{'_', '|', '_', '|', '_'},
+								 {'_', '|', '_', '|', '_'},
+								 {'_', '|', '_', '|', '_'}};
+								 jogadasValidas = 0;
+	}
+	
+	/** O método armazenaJogada() verifica se a jogada é valida e armazena a jogada em matrizTab.*/
+    public void armazenaJogada(int posicao, char quemJogou) {
     	
     	
     	switch(posicao) {
 
-    	case 1:
+    	case 1: // Armazena na posição 1 de matrizTab.
     		if (matrizTab[0][0] != '_') {
     			System.out.println("Jogada invalida, passou a vez...");
     			
     		} else {
     			matrizTab[0][0] = quemJogou;
-    			jogadasValidas++;
+    	    	System.out.println("Jogada válida >>>>>>>>"); // Imprime sempre que uma jogada é válida.
+    			jogadasValidas++; // Incrementa o contador de jogadas validas.
     		}
     		break;
-    	case 2:
+    		
+    	case 2: // Armazena na posição 2 de matrizTab.
     		if (matrizTab[0][2] != '_') {
     			System.out.println("Jogada invalida, passou a vez...");
     			
     		} else {
     			matrizTab[0][2] = quemJogou;
+    	    	System.out.println("Jogada válida >>>>>>>>");
     			jogadasValidas++;
     		}
     		break;
 
-    		
-    	case 3:
+    	case 3: // Armazena na posição 3 de matrizTab.
     		if (matrizTab[0][4] != '_') {
     			System.out.println("Jogada invalida, passou a vez...");
     			
     		} else {
     			matrizTab[0][4] = quemJogou;
+    	    	System.out.println("Jogada válida >>>>>>>>");
     			jogadasValidas++;
     		}
     		break;
     		
-    	case 4:
+    	case 4: // Armazena na posição 4 de matrizTab.
     		if (matrizTab[1][0] != '_') {
     			System.out.println("Jogada invalida, passou a vez...");
     			
     		} else {
     			matrizTab[1][0] = quemJogou;
+    			System.out.println("Jogada válida >>>>>>>>");
     			jogadasValidas++;
     		}
     		break;
     		
-    	case 5:
+    	case 5: // Armazena na posição 5 de matrizTab.
     		if (matrizTab[1][2] != '_') {
     			System.out.println("Jogada invalida, passou a vez...");
     			
     		} else {
     			matrizTab[1][2] = quemJogou;
+    			System.out.println("Jogada válida >>>>>>>>");
     			jogadasValidas++;
     		}
     		break;
     		
-    	case 6:
+    	case 6: // Armazena na posição 6 de matrizTab.
     		if (matrizTab[1][4] != '_') {
     			System.out.println("Jogada invalida, passou a vez...");
     			
     		} else {
     			matrizTab[1][4] = quemJogou;
+    			System.out.println("Jogada válida >>>>>>>>");
     			jogadasValidas++;
     		}
     		break;
     		
-    	case 7:
+    	case 7: // Armazena na posição 7 de matrizTab.
     		if (matrizTab[2][0] != '_') {
     			System.out.println("Jogada invalida, passou a vez...");
     			
     		} else {
     			matrizTab[2][0] = quemJogou;
+    			System.out.println("Jogada válida >>>>>>>>");
     			jogadasValidas++;
     		}
     		break;
     		
-    	case 8:
+    	case 8: // Armazena na posição 8 de matrizTab.
     		if (matrizTab[2][2] != '_') {
     			System.out.println("Jogada invalida, passou a vez...");
     			
     		} else {
     			matrizTab[2][2] = quemJogou;
+    			System.out.println("Jogada válida >>>>>>>>");
     			jogadasValidas++;
     		}
     		break;
  
-    	case 9:
+    	case 9: // Armazena na posição 9 de matrizTab.
     		if (matrizTab[2][4] != '_') {
     			System.out.println("Jogada invalida, passou a vez...");
     			
     		} else {
     			matrizTab[2][4] = quemJogou;
+    			System.out.println("Jogada válida >>>>>>>>");
     			jogadasValidas++;
     		}
     		break;
-    			
-    	case 0:
-    		System.out.println("Encerrando aplicação...");
-			System.exit(0);
-			break;
 
-    	default:
-    		System.out.println("Jogada invalida!!!");
-    		InfoTab();
+    	default: // Retorna uma mensagem e imprime as instruções na tela.
+        	System.out.println("Jogada invalida >>>>>>>>"); // Imprime sempre que uma jogada esta fora da range.
+    		infoTab();
     		
-    	}
-    	System.out.println("Jogadas válidas >>>>>>>>" + jogadasValidas); // Estou usando para verificar se contador esta funcionando
-    	AtualizaTabuleiro();
+    	} 	
     }
     
+    /** O método verificaStatus() verifica o status atual da partida utilizando condicionais.*/
     public int verificaStatus() {
     	
     	// return 0 = jogo inacabado.
@@ -149,8 +173,8 @@ public class Tabuleiro extends JogoDaVelha {
         	// Diagonais.
         		(matrizTab[0][0] == HUMANO) && (matrizTab[1][2] == HUMANO) && (matrizTab[2][4] == HUMANO) ||
         		(matrizTab[2][0] == HUMANO) && (matrizTab[1][2] == HUMANO) && (matrizTab[0][4] == HUMANO)) {
-
-        	System.out.printf("Parabens %s você venceu!", JogoDaVelha.nome);
+        	
+        	// Retorna Humano venceu.
         	return 1;
         }
 
@@ -164,32 +188,36 @@ public class Tabuleiro extends JogoDaVelha {
 	        		(matrizTab[0][0] == CPU) && (matrizTab[1][0] == CPU) && (matrizTab[2][0] == CPU) ||
 	        		(matrizTab[0][2] == CPU) && (matrizTab[1][2] == CPU) && (matrizTab[2][2] == CPU) ||
 	        		(matrizTab[0][4] == CPU) && (matrizTab[1][4] == CPU) && (matrizTab[2][4] == CPU) ||
-	        		(matrizTab[2][0] == CPU) && (matrizTab[1][2] == CPU) && (matrizTab[0][4] == CPU)) {
 
-	        	System.out.println("Você PERDEU!");
-	        	return 2;
+	        	// Diagonais.
+		    		(matrizTab[0][0] == CPU) && (matrizTab[1][2] == CPU) && (matrizTab[2][4] == CPU) ||
+		    		(matrizTab[2][0] == CPU) && (matrizTab[1][2] == CPU) && (matrizTab[0][4] == CPU)) {
+
+        	// Retorna CPU venceu.
+        	return 2;
         }
-         // Retorna Empate.
+        
         else if(jogadasValidas == 9) {
-        	System.out.println("EMPATE! Até a próxima HUMANO!");
+        	// Retorna Empate.
         	return 3;
         }
      
         else
+        	// Retorna jogo inacabado.
         	return 0;
     }
     
-    // Atualiza o tabuleiro.
-	public void AtualizaTabuleiro () {
+    /** O método imprimeTabuleiro() imprime o tabuleiro atual.*/
+	public void imprimeTabuleiro() {
 
-	    for (int i = 0; i < 3; i++) {
+	    for (int i = 0; i <= 2; i++) {
 				System.out.println(matrizTab[i]);
 	    }
 	    System.out.println();
 	}
 
-	// Imprime uma instrução de como escolher as jogadas.
-	public void InfoTab() {
+	/** O método infoTab() imprime uma instrução de como escolher as jogadas.*/
+	public void infoTab() {
 		System.out.println("Realize as jogadas de acordo com o mapa a seguir:");
 	    System.out.println("* * * * *");
 	    System.out.println("*" + " " + "1" + "|" + "2" + "|" + "3" + " " + "*");

@@ -1,64 +1,69 @@
 package com.sizanosky;
 
-public class Computador extends Tabuleiro {
-    
+/*
+ * Classe Computador
+ *
+ * Classe que controla as jogadas do CPU
+ *
+ * @author  Marcos Fabricio Sizanosky
+ * @version 1.0
+ * @since   2021-10-15
+ */
+
+/** A classe Computador controla as jogadas do CPU e envia para o tabuleiro.*/
+public class Computador {
+	
 	// Constants.
-    final int FACIL = 1;
-    final int MEDIO = 2;
-    final int DIFICIL = 3;
-    
-	private static int nivel;
+	final char CPU = 'O';
 
     // Constructor.
     public Computador() {
     }
 
     // Methods.
-    public void setCPU(int opcao) {
-
-    	switch (opcao) {
-    	case 1:
-    		nivel = FACIL;
-    		System.out.println("\nVocê selecionou o nível: \n    **** FÁCIL ****\n");
-    		break;
-    		
-    	case 2:
-    		nivel = MEDIO;
-    		System.out.println("\nVocê selecionou o nível: \n    **** MÉDIO ****\n");
-    		break;
-    		
-    	case 3:
-    		nivel = DIFICIL;
-    		System.out.println("\nVocê selecionou o nível: \n    **** DIFÍCIL ****\n");
-    		
-    	case 0:
-    		System.out.println("Encerrando aplicação...");
-			System.exit(0);
-    		break;
-    		
-    	default:
-    		System.out.println("Opção invalida!");
-    	}
-//    	return nivel;
-    }
-
-    public void setJogadaCPU() {
-
+    /** O método setCPU() .*/
+    public int setCPU(int opcao) {
     	
-        if (nivel == FACIL) {
-        	ComputadorA compA = new ComputadorA();
-            
-            compA.SetJogadaCompA();
+    	// return 1 = ComputadorA.
+    	// return 2 = ComputadorB.
+    	// return 3 = ComputadorC.
 
-        } else if (nivel == MEDIO) {
-        	ComputadorB compB = new ComputadorB();
-            
-            compB.SetJogadaCompB();
-
-        } else if (nivel == DIFICIL) {
-        	ComputadorC compC = new ComputadorC();
-            
-            compC.SetJogadaCompC();
-        }
+		switch (opcao) {
+			case 1 -> {
+				System.out.println("\nVocê selecionou o CPU A: \n    **** FÁCIL ****\n");
+				return 1;
+			}
+			case 2 -> {
+				System.out.println("\nVocê selecionou o CPU B: \n    **** MÉDIO ****\n");
+				return 2;
+			}
+			case 3 -> {
+				System.out.println("\nVocê selecionou o CPU C: \n    **** DIFÍCIL ****\n");
+				return 3;
+			}
+			default -> System.out.println("Opção invalida!");
+		}
+		return 0;
+    }
+    
+    /** O método setJogadaCPU() .*/
+	public void setJogadaCPU(Tabuleiro tab, int cpuEscolhido) {
+		int jogada = 0;
+		
+    	if (cpuEscolhido == 1) {
+    		ComputadorA compA = new ComputadorA();
+    		jogada = compA.jogadaCompA(tab);
+    	}
+    	else if (cpuEscolhido == 2) {
+    		ComputadorB compB = new ComputadorB();
+    		jogada = compB.jogadaCompB(tab);
+    	}
+    	else if (cpuEscolhido == 3) {
+    		ComputadorC compC = new ComputadorC();
+    		jogada = compC.jogadaCompC(tab);
+    	}
+    	
+    	tab.armazenaJogada(jogada, CPU);
+    	
     }
 }

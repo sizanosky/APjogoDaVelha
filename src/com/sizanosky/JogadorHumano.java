@@ -1,31 +1,28 @@
 package com.sizanosky;
 
-public class JogadorHumano extends Tabuleiro {
+/*
+ *  Classe JogadorHumano
+ *
+ *  Classe que controla as jogadas do jogadorHumano.
+ *
+ * @author  Marcos Fabricio Sizanosky
+ * @version 1.0
+ * @since   2021-10-15 
+*/
+
+/** A classe JogadorHumano controla as jogadas do jogadorHumano e envia para o tabuleiro.*/
+public class JogadorHumano {
 
 	// Constants.
 	final char HUMANO = 'X';
-//	final char OPONENTE = 'O';
 
 	public JogadorHumano() {
-
 	}
 
-	public void setJogadaHumano(int jogadaHumano)  {
+	// Methods.
+	/** O método setJogadasHumano() recebe a entrada do usuário e envia para o tabuleiro.*/
+	public void setJogadaHumano(Tabuleiro tab, int jogadaHumano)  {
 
-		for (int lin=0; lin < 2; lin++) {
-			for (int col=0; col <= 4; col++) {
-
-				if (matrizTab[lin][col] == '_') {
-					ArmazenaJogada(jogadaHumano, HUMANO);
-				}
-				
-				else {
-					lin++;
-					col++;
-				}
-
-			}
-		}
-		
+		tab.armazenaJogada(jogadaHumano, HUMANO);
 	}
 }
