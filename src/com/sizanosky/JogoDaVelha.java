@@ -14,15 +14,11 @@ import java.util.Scanner;
 
 /** Classe principal do jogo.*/
 public class JogoDaVelha {
-
-	// Inicia as variáveis da aplicação.
+	
+	// Inicia as variáveis.
 	static int opcaoMenu;
-	static int status;
-	static int opcaoOponente;
-	static String nome;
-	static int cpu;
+	static String nomeJogador = "HUMANO";
 	static String nomeCPU = "CPU";
-	static int contRodadas;
 	static int vitoriasHumano;
 	static int vitoriasCPU;
 	static int empates;
@@ -64,36 +60,23 @@ public class JogoDaVelha {
 			}	
 
 			else if (opcaoMenu == 1) {
-				// Zera tabuleiro e todos os contadores.
-				pTabuleiro.zeraTabuleiro();
-				status = 0;
-				contRodadas = 1;
+				// Zera todos os contadores.
 				vitoriasHumano = 0;
 				vitoriasCPU = 0;
 				empates = 0;
 
 				// Identifica o jogador humano.
 				System.out.println("Olá, digite as suas iniciais ou nome (ex: HUM / HUMANO): ");
-				nome = input.next();
+				nomeJogador = input.next();				
 			}
 
-			else if (opcaoMenu == 2) {
-				// Reinicia o tabuleiro, contador de rodadas e a variável status.
-				pTabuleiro.zeraTabuleiro();
-				contRodadas = 1;
-				status = 0;
-				if (nome == null) {
-					nome = "HUMANO";
-				}
-			}
-			
 			// Recebe a entrada do usuário e armazena o nome do oponente escolhido.
 			System.out.println("Escolha seu oponente | 1-(CPU A), 2-(CPU B) ou 3-(CPU C): ");
-			opcaoOponente = input.nextInt();
-			
+			int opcaoOponente = input.nextInt();
+
 			// Atribui o jogador CPU com base na escolha do usuário.
-			cpu = pCPU.setCPU(opcaoOponente);
-			
+			int cpu = pCPU.setCPU(opcaoOponente);
+
 			// Atribui um nome ao oponente CPU
 			if (opcaoOponente == 1) {
 				nomeCPU = "CPU A";
@@ -108,79 +91,73 @@ public class JogoDaVelha {
 			// Imprime uma informação sobre o tabuleiro.
 			pTabuleiro.infoTab();
 
-			// Inicia a partida.
-			while (true) {
+			// Cria um tabuleiro vazio.
+			pTabuleiro.criaTab();
+			int contRodadas = 1;
+			int status = 0;
 
-				System.out.println("*** Rodada nº" + contRodadas + " ****");
+
+			// Inicia a partida.
+			while (status == 0) {
 
 				/********** Jogador Humano **********/
-				if (status == 0) {
-					System.out.println(nome + " escolha a sua jogada: ");
+				System.out.println(nomeJogador + " escolha a sua jogada: ");
 
-					// Recebe a jogada do Humano.
-					int jogadaHumano = input.nextInt();
+				// Recebe a jogada do Humano.
+				int jogadaHumano = input.nextInt();
 
-					// Executa a jogada do humano e imprime o tabuleiro.
-					pHumano.setJogadaHumano(pTabuleiro, jogadaHumano);
-					pTabuleiro.imprimeTabuleiro();
+				// Executa a jogada do humano e imprime o tabuleiro.
+				pHumano.execJogadaHumano(pTabuleiro, jogadaHumano);
+				pTabuleiro.imprimeTabuleiro();
 
-					// Verifica o status do jogo (0 = inacabado; 1 = vencedor humano; 2 = vencedor CPU; 3 = empate).
-					status = pTabuleiro.verificaStatus();
-					System.out.println("status>>>>>>>>" + status);
-				}
+				// Verifica o status do jogo (0 = inacabado; 1 = vencedor humano; 2 = vencedor CPU; 3 = empate).
+				status = pTabuleiro.verificaStatus();
 
 				/********** Jogador CPU **********/
 				if (status == 0) {
 					System.out.println("Jogada do " + nomeCPU);
 
 					// Recebe jogada CPU e imprime o tabuleiro.
-					pCPU.setJogadaCPU(pTabuleiro, cpu);
+					pCPU.execJogadaCPU(pTabuleiro, cpu);
 					pTabuleiro.imprimeTabuleiro();
 
 					// Verifica o status do jogo (0 = inacabado; 1 = vencedor humano; 2 = vencedor CPU; 3 = empate).
 					status = pTabuleiro.verificaStatus();
-					System.out.println("status>>>>>>>>" + status);
 
 					// Incrementa a variável contRodadas.
 					contRodadas++;
 
-					System.out.print("_________________________________________________\n"); // Separador
-//					continue;
+					System.out.println("_________________________________________________\n"); // Separador
 				}
+			}
 
-				/********** Resultado **********/
-				if (status != 0) {
-					
-					// Humano venceu.
-					if (status == 1) {
-						vitoriasHumano++;
-						System.out.printf("\n*** PARABÉNS %s você derrotou %s !!! ***\n", nome, nomeCPU);
-					}
+			/********** Resultado **********/
+			
+			System.out.print("_________________________________________________\n");
+			// Humano venceu.
+			if (status == 1) {
+				vitoriasHumano++;
+				System.out.printf("\n*** PARABÉNS %s você derrotou %s !!! ***\n", nomeJogador, nomeCPU);
+			}
 
-					// CPU venceu. 
-					else if (status == 2) {
+			// CPU venceu. 
+			else if (status == 2) {
 
-						vitoriasCPU++;
-						System.out.printf("\n+++ Boa tentativa %s mas você PERDEU... | %s Wins!!! +++", nome, nomeCPU);
-					}
+				vitoriasCPU++;
+				System.out.printf("\n+++ Boa tentativa %s mas você PERDEU... | %s Wins!!! +++", nomeJogador, nomeCPU);
+			}
 
-					// Empate.
-					else if (status == 3) {
-						empates++;
-						System.out.printf("\nEMPATE!!! Até a próxima %s!\n", nome);
-					}
-					System.out.println("fim da pagina>>>>>>>>" + status);
-					break;
-				} 
-
-
-			} // Fim do laço while (partida).
+			// Empate.
+			else if (status == 3) {
+				empates++;
+				System.out.printf("\nEMPATE!!! Até a próxima %s!\n", nomeJogador);
+			}
 
 			// Imprime as estatísticas.
 			System.out.println("Jogo encerrado em " + (contRodadas -1) + " rodadas.\n");
 
 			System.out.println("***** Estatisticas *****");
-			System.out.printf("Vitorias jogador %s : %d\n", nome, vitoriasHumano);
+			System.out.printf("Vitorias jogador %s : %d\n", nomeJogador, vitoriasHumano);
 			System.out.printf("Vitorias CPU : %d\n", vitoriasCPU);
 			System.out.printf("Empates : %d\n", empates);
 			System.out.print("_________________________________________________\n\n");
@@ -188,3 +165,7 @@ public class JogoDaVelha {
 		}
 	}
 }
+
+
+
+

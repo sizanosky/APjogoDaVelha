@@ -8,7 +8,7 @@ package com.sizanosky;
  * @author  Marcos Fabricio Sizanosky
  * @version 1.0
  * @since   2021-10-15
-*/
+ */
 
 /** A classe Tabuleiro valida, armazena e imprime todas as jogadas de todos os jogadores
  * a classe também controla o status da partida.*/
@@ -19,35 +19,33 @@ public class Tabuleiro {
     final char CPU = 'O';
 
     // Variables.
-	public char [][]matrizTab;
-	public int jogadasValidas = 0;
+	char [][]matrizTab;
+	int jogadasValidas = 0;
 	
 
 	// Construtor.
 	public Tabuleiro() {
-//		matrizTab = new char[][]{{'_', '|', '_', '|', '_'},
-//								 {'_', '|', '_', '|', '_'},
-//								 {'_', '|', '_', '|', '_'}};
 	}
+	
 	
     // Methods.
 	/** O método zeraTabuleiro() zera todas as jogadas e inicializa matrizTab com a forma do tabuleiro.*/
-	public void zeraTabuleiro() {
+	public void criaTab() {
 		matrizTab = new char[][]{{'_', '|', '_', '|', '_'},
 								 {'_', '|', '_', '|', '_'},
 								 {'_', '|', '_', '|', '_'}};
 								 jogadasValidas = 0;
 	}
 	
+	
 	/** O método armazenaJogada() verifica se a jogada é valida e armazena a jogada em matrizTab.*/
     public void armazenaJogada(int posicao, char quemJogou) {
-    	
     	
     	switch(posicao) {
 
     	case 1: // Armazena na posição 1 de matrizTab.
     		if (matrizTab[0][0] != '_') {
-    			System.out.println("Jogada invalida, passou a vez...");
+    			System.out.println("Jogada invalida, passou a vez..."); // 
     			
     		} else {
     			matrizTab[0][0] = quemJogou;
@@ -148,8 +146,9 @@ public class Tabuleiro {
         	System.out.println("Jogada invalida >>>>>>>>"); // Imprime sempre que uma jogada esta fora da range.
     		infoTab();
     		
-    	} 	
+    	}	
     }
+    
     
     /** O método verificaStatus() verifica o status atual da partida utilizando condicionais.*/
     public int verificaStatus() {
@@ -207,6 +206,7 @@ public class Tabuleiro {
         	return 0;
     }
     
+    
     /** O método imprimeTabuleiro() imprime o tabuleiro atual.*/
 	public void imprimeTabuleiro() {
 
@@ -215,6 +215,7 @@ public class Tabuleiro {
 	    }
 	    System.out.println();
 	}
+	
 
 	/** O método infoTab() imprime uma instrução de como escolher as jogadas.*/
 	public void infoTab() {
@@ -223,6 +224,8 @@ public class Tabuleiro {
 	    System.out.println("*" + " " + "1" + "|" + "2" + "|" + "3" + " " + "*");
 	    System.out.println("*" + " " + "4" + "|" + "5" + "|" + "6" + " " + "*");
 	    System.out.println("*" + " " + "7" + "|" + "8" + "|" + "9" + " " + "*");
-	    System.out.println("* * * * *\n");
+	    System.out.println("* * * * *");
+		System.out.println("_________________________________________________\n");
+
 	}
 }
