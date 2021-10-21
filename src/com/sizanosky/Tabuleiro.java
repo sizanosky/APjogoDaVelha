@@ -5,9 +5,9 @@ package com.sizanosky;
  *
  * Classe que valida e armazena todas as jogadas de todos os jogadores.
  *
- * @author  Marcos Fabricio Sizanosky
+ * @author: Marcos Fabricio Sizanosky
  * @version 1.0
- * @since   2021-10-15
+ * @since: 2021-10-15
  */
 
 /** A classe Tabuleiro valida, armazena e imprime todas as jogadas de todos os jogadores

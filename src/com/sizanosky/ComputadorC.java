@@ -5,18 +5,21 @@ package com.sizanosky;
  *
  * Classe que executa o padrão de jogadas do CPU C. 
  *
- * @author  Marcos Fabricio Sizanosky
+ * @author: Marcos Fabricio Sizanosky
  * @version 1.0
- * @since   2021-10-15 
+ * @since: 2021-10-15
  */
 
 /** A classe ComputadorC .*/
 public class ComputadorC extends Computador {
 
+	// Variables.
+	String nomeCompC;
 	int jogada;
 
 	// Constructor.
 	public ComputadorC() {
+		this.nomeCompC = "CPU C";
 	}
 
 	// Methods.
@@ -28,6 +31,8 @@ public class ComputadorC extends Computador {
 
 	/** O método jogadaCompC() retorna uma jogada do ComputadorC gerada a partir da função getRandomNum().*/
 	public int jogadaCompC(Tabuleiro tab) {
+		// Este método faz jogadas de forma aleatória buscando sempre o próximo espaço livre.
+
 
 		int pos = getRandomNum(1, 9);
 
