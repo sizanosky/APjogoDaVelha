@@ -14,18 +14,26 @@ package com.sizanosky;
 public class ComputadorB extends Computador {
 
 	// Variables.
-	String nomeCompB;
+	final char CPU_B = 'O';
+	public String nomeCompB = "CPU B";
 
 	// Constructor.
 	public ComputadorB() {
-		this.nomeCompB = "CPU B";
 	}
 
 	// Methods.
-	/** O método jogadaCompB() .*/
-	public int jogadaCompB(Tabuleiro tab) {
-		// Este método faz jogadas de forma sequencial do maior número (9) até (1) buscando sempre o próximo espaço livre.
-
+	
+	/** O método getNomeCPU() retorna o nome do CPU escolhido. */
+	@Override
+	public String getNomeCPU() {
+		return nomeCompB;
+	}
+	
+	/** O método execJogadaCPU() sobrescreve o método da classe Computador */
+	@Override
+	public void execJogadaCPU(Tabuleiro tab) {
+		// Este método faz jogadas de forma sequencial do maior número (9) ao menor numero (1) 
+		// buscando sempre o próximo espaço livre.
 
 		int pos = 9;
 
@@ -33,13 +41,13 @@ public class ComputadorB extends Computador {
 			for (int col=4; col >= 0; col -= 2) {
 
 				if (tab.matrizTab[lin][col] == '_') {
-					return pos;
+					tab.armazenaJogada(pos, CPU_B);
+					return;
 				}
 				else {
 					pos--;
 				}
 			}
 		}
-		return pos;
 	}
 }

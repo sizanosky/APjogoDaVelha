@@ -14,79 +14,84 @@ package com.sizanosky;
 public class ComputadorC extends Computador {
 
 	// Variables.
-	String nomeCompC;
-	int jogada;
+	final char CPU_C = 'O';
+	public String nomeCompC = "CPU C";
 
 	// Constructor.
 	public ComputadorC() {
-		this.nomeCompC = "CPU C";
 	}
 
 	// Methods.
+	
+	/** O método getNomeCPU() retorna o nome do CPU escolhido. */
+	@Override
+	public String getNomeCPU() {
+		return nomeCompC;
+	}
+	
 	/** O método getRandomNum() gera um numero aleatório entre 1 e 9. */
 	public int getRandomNum(int min, int max) {
 		return (int) ((Math.random() * (max - min)) + min);
 	}
 
-
-	/** O método jogadaCompC() retorna uma jogada do ComputadorC gerada a partir da função getRandomNum().*/
-	public int jogadaCompC(Tabuleiro tab) {
+	/** O método execJogadaCPU() sobrescreve o método da classe Computador */
+	@Override
+	public void execJogadaCPU(Tabuleiro tab) {
 		// Este método faz jogadas de forma aleatória buscando sempre o próximo espaço livre.
 
-
-		int pos = getRandomNum(1, 9);
+		int numSorteado = getRandomNum(1, 10);
+		int pos; // Posição que sera jogada no tabuleiro.
 
 		while (true) {
-
-			if ((pos == 1) && (tab.matrizTab[0][0] == '_')) {
-				jogada = 1;
+			if ((numSorteado == 1) && (tab.matrizTab[0][0] == '_')) {
+				pos = 1;
 				break;
 			}
 
-			else if ((pos == 2) && (tab.matrizTab[0][2] == '_')) {
-				jogada = 2;
+			else if ((numSorteado == 2) && (tab.matrizTab[0][2] == '_')) {
+				pos = 2;
 				break;
 			}
 
-			else if ((pos == 3) && (tab.matrizTab[0][4] == '_')) {
-				jogada = 3;
+			else if ((numSorteado == 3) && (tab.matrizTab[0][4] == '_')) {
+				pos = 3;
 				break;
 			}
 
-			else if ((pos == 4) && (tab.matrizTab[1][0] == '_')) {
-				jogada = 4;
+			else if ((numSorteado == 4) && (tab.matrizTab[1][0] == '_')) {
+				pos = 4;
 				break;
 			}
 
-			else if ((pos == 5) && (tab.matrizTab[1][2] == '_')) {
-				jogada = 5;
+			else if ((numSorteado == 5) && (tab.matrizTab[1][2] == '_')) {
+				pos = 5;
 				break;
 			} 
 
-			else if ((pos == 6) && (tab.matrizTab[1][4] == '_')) {
-				jogada = 6;
+			else if ((numSorteado == 6) && (tab.matrizTab[1][4] == '_')) {
+				pos = 6;
 				break;
 			}
 
-			else if ((pos == 7) && (tab.matrizTab[2][0] == '_')) {
-				jogada = 7;
+			else if ((numSorteado == 7) && (tab.matrizTab[2][0] == '_')) {
+				pos = 7;
 				break;
 			}
 
-			else if ((pos == 8) && (tab.matrizTab[2][2] == '_')) {
-				jogada = 8;
+			else if ((numSorteado == 8) && (tab.matrizTab[2][2] == '_')) {
+				pos = 8;
 				break;
 			}
 
-			else if ((pos == 9) && (tab.matrizTab[2][4] == '_')) {
-				jogada = 9;
+			else if ((numSorteado == 9) && (tab.matrizTab[2][4] == '_')) {
+				pos = 9;
 				break;
 			} 
 
 			else 
-				pos = getRandomNum(1, 9);
+				numSorteado = getRandomNum(1, 10); // Sorteia outra posição.
 		}
-
-		return jogada;
+		
+		tab.armazenaJogada(pos, CPU_C); // Armazena a jogada.
 	}
 }

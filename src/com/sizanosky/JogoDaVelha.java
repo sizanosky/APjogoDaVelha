@@ -15,29 +15,29 @@ import java.util.Scanner;
 /** Classe principal do jogo.*/
 public class JogoDaVelha {
 	
-	// Global Variables.
+	static final int INACABADO = 0; // Usado como parâmetro para verificar o status da partida.
 	static int opcaoMenu;
+	// Contadores.
 	static int vitoriasHumano;
 	static int vitoriasCPU;
 	static int empates;
-	static final int INACABADO = 0;
+	
 
 	public static void main(String[] args) {
 
 		System.out.println("Hello World!\n");
 		System.out.println("#### Jogo da Velha ####\n");
 
-		// Local Variables.
 		String nomeJogador;
 		String nomeCPU;
 
-		// Inicializa "input" para receber as entradas do usuário.
+		// Inicializa Scanner para receber as entradas do usuário.
 		Scanner input = new Scanner(System.in);
 
 		// Inicializa as classes auxiliares.
 		Tabuleiro pTabuleiro = new Tabuleiro();
 		JogadorHumano pHumano = new JogadorHumano("HUMANO");
-		Computador pCPU = new Computador("CPU");
+		Computador pCPU;
 
 
 		// Inicia aplicação.
@@ -74,14 +74,33 @@ public class JogoDaVelha {
 				pHumano.setNomeJogador(nomeJogador);
 			}
 
-			// Recebe a entrada do usuário e armazena o nome do oponente escolhido.
-			System.out.println("Escolha seu oponente | 1-(CPU A), 2-(CPU B) ou 3-(CPU C): ");
-			int opcaoOponente = input.nextInt();
-
-			// Atribui o jogador CPU com base na escolha do usuário.
-			int cpu = pCPU.setCPU(opcaoOponente);
-
-			nomeCPU = pCPU.getNomeCPU();
+			// Recebe a entrada do usuário, define o nível de dificuldade e o nome do oponente escolhido.
+			while (true) {
+				System.out.println("Escolha seu oponente | 1-(CPU A), 2-(CPU B) ou 3-(CPU C): ");
+				int oponente = input.nextInt();
+			
+				if (oponente == 1) {
+					pCPU = new ComputadorA();
+					nomeCPU = pCPU.getNomeCPU();
+					System.out.println("\nVocê selecionou o CPU A:  **** FÁCIL ****\n");
+					break;
+				}
+				else if (oponente == 2) {
+					pCPU = new ComputadorB();
+					nomeCPU = pCPU.getNomeCPU();
+					System.out.println("\nVocê selecionou o CPU B:  **** MÉDIO ****\n");
+					break;
+				}
+				else if (oponente == 3){
+					pCPU = new ComputadorC();
+					nomeCPU = pCPU.getNomeCPU();
+					System.out.println("\nVocê selecionou o CPU C:  **** DIFÍCIL ****\n");
+					break;
+				}
+				else {
+					System.out.println("Opção invalida!");
+				}
+			}
 
 			// Imprime uma informação sobre o tabuleiro.
 			pTabuleiro.infoTab();
@@ -113,7 +132,7 @@ public class JogoDaVelha {
 					System.out.println("Jogada do " + nomeCPU);
 
 					// Recebe jogada CPU e imprime o tabuleiro.
-					pCPU.execJogadaCPU(pTabuleiro, cpu);
+					pCPU.execJogadaCPU(pTabuleiro);
 					pTabuleiro.imprimeTabuleiro();
 
 					// Verifica o status do jogo (0 = inacabado; 1 = vencedor humano; 2 = vencedor CPU; 3 = empate).
