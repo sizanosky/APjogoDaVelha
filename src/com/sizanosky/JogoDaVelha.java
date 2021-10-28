@@ -114,7 +114,7 @@ public class JogoDaVelha {
 			// Inicia a partida.
 			while (status == INACABADO) {
 
-				/********** Jogador Humano **********/
+				/* ********* Jogador Humano ********* */
 				System.out.println(pHumano.getNomeJogador() + " escolha a sua jogada: ");
 
 				// Recebe a jogada do Humano.
@@ -127,7 +127,7 @@ public class JogoDaVelha {
 				// Verifica o status do jogo (0 = inacabado; 1 = vencedor humano; 2 = vencedor CPU; 3 = empate).
 				status = pTabuleiro.verificaStatus();
 
-				/********** Jogador CPU **********/
+				/* ********* Jogador CPU ********* */
 				if (status == 0) {
 					System.out.println("Jogada do " + nomeCPU);
 
@@ -145,7 +145,7 @@ public class JogoDaVelha {
 				}
 			}
 
-			/********** Resultado **********/
+			/* ********* Resultado ********* */
 			
 			System.out.print("_________________________________________________\n");
 			// Humano venceu.
